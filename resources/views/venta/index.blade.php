@@ -120,6 +120,25 @@
     </div>
 
 </div>
+
+<div class="container mt-5">
+    <h1 class="text-center mb-4">Ventas</h1>
+    <div class="row">
+        <!-- Aquí puedes listar las ventas -->
+        @foreach($ventas as $venta)
+        <div class="col-md-4 mb-4">
+            <div class="card">
+                <div class="card-body">
+                    <h5 class="card-title">Venta #{{ $venta->id }}</h5>
+                    <p class="card-text">Cliente: {{ $venta->cliente->nombre }}</p>
+                    <p class="card-text">Total: {{ $venta->total }}</p>
+                    <a href="{{ route('ventas.boleta', $venta->id) }}" class="btn btn-primary">Generar Boleta</a>
+                </div>
+            </div>
+        </div>
+        @endforeach
+    </div>
+</div>
 @endsection
 
 @push('js')

@@ -9,6 +9,9 @@ use App\Models\Persona;
 use App\Models\Proveedore;
 use Exception;
 use Illuminate\Support\Facades\DB;
+use App\Models\Proveedor;
+use Illuminate\Http\Request;
+use PDF;
 
 class proveedorController extends Controller
 {
@@ -115,5 +118,24 @@ class proveedorController extends Controller
         }
 
         return redirect()->route('proveedores.index')->with('success', $message);
+    }
+    /**
+     * Display the purchases of the specified provider.
+     */
+    public function verCompras($id)
+    {
+        $proveedor = Proveedore::find($id);
+        $compras = $proveedor->compras; // Assuming there is a defined relationship
+        return view('proveedore.compras', compact('proveedor', 'compras'));
+    }
+
+    /**
+     * Generate a PDF report of all providers.
+     */
+    public function generarReporteProveedores()
+    {
+        $proveedores = Proveedore::all();
+        $pdf = PDF::loadView('pdf.reporte_proveedores', compact('proveedores'));
+        return $pdf->download('reporte_proveedores.pdf');
     }
 }

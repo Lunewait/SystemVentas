@@ -234,6 +234,70 @@
             </div>
         </div>
 
+        <!-- Botón para generar reporte de ventas -->
+        <div class="col-xl-3 col-md-6 mb-4">
+            <div class="card bg-primary text-white h-100">
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-8">
+                            <i class="fa fa-file-pdf"></i><span class="m-1">Reporte de Ventas</span>
+                        </div>
+                        <div class="col-4">
+                            <a href="{{ route('reporte.ventas') }}" class="btn btn-light btn-block">Generar</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Botón para generar reporte de compras -->
+        <div class="col-xl-3 col-md-6 mb-4">
+            <div class="card bg-success text-white h-100">
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-8">
+                            <i class="fa fa-file-pdf"></i><span class="m-1">Reporte de Compras</span>
+                        </div>
+                        <div class="col-4">
+                            <a href="{{ route('reporte.compras') }}" class="btn btn-light btn-block">Generar</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Botón para generar reporte de clientes -->
+        <div class="col-xl-3 col-md-6 mb-4">
+            <div class="card bg-warning text-white h-100">
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-8">
+                            <i class="fa fa-file-pdf"></i><span class="m-1">Reporte de Clientes</span>
+                        </div>
+                        <div class="col-4">
+                            <a href="{{ route('reporte.clientes') }}" class="btn btn-light btn-block">Generar</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Botón para generar reporte de proveedores -->
+        <div class="col-xl-3 col-md-6 mb-4">
+            <div class="card bg-danger text-white h-100">
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-8">
+                            <i class="fa fa-file-pdf"></i><span class="m-1">Reporte de Proveedores</span>
+                        </div>
+                        <div class="col-4">
+                            <a href="{{ route('reporte.proveedores') }}" class="btn btn-light btn-block">Generar</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
     </div>
     <!--div class="row">
         <div class="col-xl-6">

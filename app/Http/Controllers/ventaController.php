@@ -10,6 +10,7 @@ use App\Models\Venta;
 use Exception;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use PDF;
 
 class ventaController extends Controller
 {
@@ -114,7 +115,10 @@ class ventaController extends Controller
             DB::rollBack();
         }
 
-        return redirect()->route('ventas.index')->with('success','Venta exitosa');
+        // Generar la boleta automáticamente
+        $this->generarBoleta($venta->id);
+
+        return redirect()->route('ventas.index')->with('success','Venta exitosa y boleta generada.');
     }
 
     /**
@@ -152,5 +156,27 @@ class ventaController extends Controller
         ]);
 
         return redirect()->route('ventas.index')->with('success','Venta eliminada');
+    }
+
+    public function generarBoleta($id)
+    {
+        $venta = Venta::find($id);
+
+        if (!$venta) {
+            return redirect()->back()->with('error', 'Venta no encontrada.');
+        }
+
+        $pdf = PDF::loadView('pdf.boleta', compact('venta'));
+        $pdf->save(storage_path("app/public/boletas/boleta_{$venta->id}.pdf"));
+
+        // Opcional: Puedes enviar la boleta por correo electrónico al cliente
+        // Mail::to($venta->cliente->email)->send(new BoletaMail($venta, $pdf));
+    }
+
+    public function generarReporteVentas()
+    {
+        $ventas = Venta::all();
+        $pdf = PDF::loadView('pdf.reporte_ventas', compact('ventas'));
+        return $pdf->download('reporte_ventas.pdf');
     }
 }

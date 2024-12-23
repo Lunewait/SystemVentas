@@ -10,6 +10,7 @@ use App\Models\Proveedore;
 use Exception;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use PDF;
 
 class compraController extends Controller
 {
@@ -135,5 +136,12 @@ class compraController extends Controller
         ]);
 
         return redirect()->route('compras.index')->with('success','Compra eliminada');
+    }
+
+    public function generarReporteCompras()
+    {
+        $compras = Compra::all();
+        $pdf = PDF::loadView('pdf.reporte_compras', compact('compras'));
+        return $pdf->download('reporte_compras.pdf');
     }
 }

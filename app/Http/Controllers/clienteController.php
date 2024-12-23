@@ -10,6 +10,7 @@ use App\Models\Persona;
 use Exception;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use PDF;
 
 class clienteController extends Controller
 {
@@ -116,5 +117,25 @@ class clienteController extends Controller
         }
 
         return redirect()->route('clientes.index')->with('success', $message);
+    }
+
+    public function exportarPDF($id)
+    {
+        $cliente = Cliente::find($id);
+        $pdf = PDF::loadView('pdf.cliente', compact('cliente'));
+        return $pdf->download('cliente.pdf');
+    }
+    public function verVentas($id)
+    {
+    $cliente = Cliente::find($id);
+    $ventas = $cliente->ventas; // Asumiendo que hay una relación definida
+    return view('clientes.ventas', compact('cliente', 'ventas'));
+    }
+
+    public function generarReporteClientes()
+    {
+        $clientes = Cliente::all();
+        $pdf = PDF::loadView('pdf.reporte_clientes', compact('clientes'));
+        return $pdf->download('reporte_clientes.pdf');
     }
 }
